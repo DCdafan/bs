@@ -21,11 +21,14 @@ var Game = function(){
   this.width     = $(window).width()>540?540:$(window).width();
   this.height    = $(window).height();
   this.timer     = null;
-  this.time      = 60;
+  this._time      = 60;
   this.cardCount = 16;
   this.cardList  = [];
   this._showElement = [];
   this._showList = [];
+  this._fail = false;
+  this._success = false;
+  this._score = 0 ;
   this.init();
   this.step_1();
 }
@@ -54,10 +57,10 @@ Game.prototype.step_2 = function(){
   _this.content.removeClass('step-1');
   _this.content.addClass('step-2');
   //变量初始化
-  _this.time = 60;
+  // _this._time = 60;
   _this.cardList = [];
   var html='';
-  html += '<div class="time">倒计时 <span>60</span> 秒</div>';
+  html += '<div class="time">倒计时 <span>'+_this._time+'</span> 秒</div>';
   html += '<div class="row" style="padding-left:1%;">'
   for(var i =0;i<_this.cardCount;i++){
     html+= '<div class="card" style="width:'+this.width*0.22+'px;height:'+this.width*0.22*1.25+'px;"></div>'
@@ -69,10 +72,48 @@ Game.prototype.step_2 = function(){
   shuffle(_this.cardList);
   console.log(_this.cardList);
   _this.content.html(html);
+  _this.time();
 }
+//计时
+Game.prototype.time = function(){
+  var _this =this;
+  var timer = null;
+  timer=setInterval(function(){
+    _this._time--;
+    if(_this._success){
+      clearInterval(timer);
+      return;
+    }
+    if(_this._time<0){
+      clearInterval(timer);
+      _this.fail();
+      return;
+    }
+    _this.content.find('.time').html('倒计时 <span>'+_this._time+'</span> 秒');
+  },1000)
+}
+
+//失败
+Game.prototype.fail = function(){
+  var _this = this;
+  _this._fail = true;
+  console.info('fail');
+  $('.shade').show();
+  $('.dialog-fail').fadeIn();
+}
+//成功
+Game.prototype.success = function(){
+  var _this = this;
+  _this._success = true;
+  console.info('success');
+  $('.shade').show();
+  $('.dialog-success').fadeIn();
+}
+
 //游戏判断
 Game.prototype.play = function(el){
   var _this = this;
+  if(_this._fail) return;
   if(el.hasClass('show')) return;
   if(_this._showList.length>=2) return;
   var index = el.index();
@@ -84,12 +125,18 @@ Game.prototype.play = function(el){
       if(_this._showList[0]==_this._showList[1]){
         _this._showElement[0].removeClass('show').addClass('hide');
         _this._showElement[1].removeClass('show').addClass('hide');
+        _this._score+=2;
       }else{
         _this._showElement[0].removeClass('show');
         _this._showElement[1].removeClass('show');
       }
       _this._showList=[];
       _this._showElement=[];
+      console.log(_this._score);
+      if(_this._score==_this.cardCount){
+        _this._success=true;
+        _this.success();
+      }
     },500)
   }
 
@@ -121,6 +168,11 @@ Game.prototype.event = function(){
     if($el.hasClass('card')){
       _this.play($el);
     }
+    //我知道了
+    if($el.hasClass('btn-know')){
+      $('.shade').hide();
+      $('.dialog').hide();
+    }
   });
   document.body.addEventListener('touchmove',function(ev){
     ev.stopPropagation();
@@ -136,5 +188,5 @@ window.onload = load();
 
 function load(){
   var game = new Game();
-  game.step_2();
+  // game.step_2();
 }

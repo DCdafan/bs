@@ -194,3 +194,44 @@ table {border-collapse: collapse; border-spacing: 0;}
 .card-8:after{
   background-image: url(../images/i08.png);
 }
+
+
+.dialog-success{
+  left:50%;
+  margin-left: -92.5px;
+  top:50%;
+  margin-top: -200px;
+  width: 185px;
+  height: 262px;
+  background: url(../images/success.png) center no-repeat;
+  -webkit-background-size: cover;
+  background-size: cover;
+}
+.dialog-success p{
+  margin-top: 150px;
+  text-align: center;
+  color:#fff;
+  font-size: 30px;
+  font-weight: bold;
+}
+.btn-know{
+  position: absolute;
+  top:110%;
+  left:0;
+  width: 185px;
+  height: 47px;
+  background: url(../images/know.png) center no-repeat;
+  -webkit-background-size: cover;
+  background-size: cover;
+}
+.dialog-fail{
+  left:50%;
+  margin-left: -92.5px;
+  top:50%;
+  margin-top: -200px;
+  width: 185px;
+  height: 262px;
+  background: url(../images/fail.png) center no-repeat;
+  -webkit-background-size: cover;
+  background-size: cover;
+}

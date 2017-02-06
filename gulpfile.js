@@ -4,7 +4,7 @@ var gulp         = require('gulp'),
     reload       = browserSync.reload;
 
 
-var projectNum = '9002' ; 
+var projectNum = '9001' ; 
 
 // 静态服务器
 gulp.task('browser-sync', function() {
