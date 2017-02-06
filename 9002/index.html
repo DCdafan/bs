@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" style="font-size: 30px;">
+<head>
+  <meta charset="UTF-8">
+  <title>拼字游戏</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
+  <link rel="stylesheet" href="src/index.css">
+  <style>
+    .loading{
+      position: absolute;
+      top:0;
+      left:0;
+      right:0;
+      bottom:0;
+      z-index:100000;
+      background:#000;
+    }
+    .load-1,.load-2{width: 1.6rem;height: 1.6rem;background: rgba(216, 189, 51,0.6);position: absolute;top:50%;left: 50%;margin-left: -0.8rem;margin-top: -0.8rem;border-radius: 50%;}
+    .tip{
+      font-size: 0.5rem;
+      color: rgb(216, 189, 51)  ;
+      text-align: center;
+      position: absolute;
+      top:50%;
+      padding-top: 1rem;
+      left: 0;
+      width: 100%;
+    }
+    .load-1{
+      -webkit-animation: myload-1 2s infinite ease-in-out;
+    }
+    @-webkit-keyframes myload-1{
+      from {
+        -webkit-transform: scale3d(.2,.2,1);
+      }
+      50%{
+        -webkit-transform: scale3d(1,1,1);
+      }
+      to{
+        -webkit-transform: scale3d(.2,.2,1);
+      }
+    }
+    .load-2{
+      -webkit-animation: myload-2 2s infinite ease-in-out;
+    }
+    @-webkit-keyframes myload-2{
+      from {
+        -webkit-transform: scale3d(1,1,1);
+      }
+      50%{
+        -webkit-transform: scale3d(0.2,0.2,1);
+      }
+      to{
+        -webkit-transform: scale3d(1,1,1);
+      }
+    }
+  </style>
+  <script>
+    function load(list,callback){
+      if(list == undefined ) return
+      var img = list.img == undefined ? [] : list.img ;
+      var js = list.js == undefined ? [] : list.js ;
+      var css = list.css == undefined ? [] : list.css ;
+      var audio = list.audio == undefined ? [] : list.audio ;
+      var length = img.length + js.length + audio.length , num = 0;
+      function progress(num){
+        var progress = parseInt(num*100/length);
+        // console.log(progress)
+        document.getElementsByClassName('loading')[0].getElementsByClassName('tip')[0].innerHTML=progress+"%";
+        if(num == length){
+          document.getElementsByClassName('loading')[0].style.display='none';
+          document.body.className = document.body.className +' ready';
+
+          callback&&callback();
+        }
+      }
+      function imgLoad(src){
+        var img = new Image();
+        img.onload = function () {
+            num++;
+            progress(num);
+        };
+        img.src = src;
+      }
+      for(var i=0;i<img.length;i++){
+        imgLoad(img[i]);
+      }
+    }
+
+  </script>
+</head>
+<body>
+  <div class="loading">
+    <div class="load-1 "></div>
+    <div class="load-2"></div>
+    <div class="tip">0%</div>
+  </div>
+  <div class="content">
+    
+  </div>
+  <div class="copyright">合房网技术支持</div>
+  <div class="shade"></div>
+  <div class="dialog"></div>
+  
+  <script src="src/jquery.min.js"></script>
+  <script src="src/index.js"></script>
+  <script>
+    var loadListImg = [
+    'images/again.png',
+    'images/border.png',
+    'images/fail.png',
+    'images/game.png',
+    'images/mark.png',
+    'images/play.png',
+    'images/step_1.jpg',
+    'images/step_2.jpg',
+    'images/step_3.jpg',
+    'images/success.png',
+    'images/time.jpg'
+    ];
+    load({
+      img : loadListImg
+    },function(){
+      var game = new Game();
+    });
+  </script>
+</body>
+</html>

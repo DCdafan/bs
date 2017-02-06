@@ -1,0 +1,20 @@
+$icons : ('start' 404 90  start false)
+         ('again' 230 72  again false)
+         ;
+
+@each $item in $icons{
+  $src    : nth($item,1);
+  $width  : nth($item,2);
+  $height : nth($item,3);
+  $name   : nth($item,4);
+  $active : nth($item,5);
+  .icon-#{$name}{
+    @include icon('../images/'+$src+'.png',$width,$height);
+  }
+  @if $active{
+    .icon-#{$name}:active{
+      @include icon('../images/'+$src+'-active.png',$width,$height);
+    }
+  }
+}
+

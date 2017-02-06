@@ -1,0 +1,215 @@
+/*reset*/
+*{
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  -webkit-tap-highlight-color: transparent;  
+  -webkit-appearance: none;  
+}
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+img{max-width: 100%;}
+table {border-collapse: collapse; border-spacing: 0;}
+/*公共样式*/
+.btn:active{opacity: 0.6;}
+/*内容部分*/
+body{
+  background-color: #000;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.content{
+  position: relative;
+  z-index:1;
+  width: 100%;
+  max-width: 540px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: hidden;
+}
+.shade{
+  display: none;
+  position: absolute;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  z-index:900;
+  background-color: rgba(0,0,0,.6);
+}
+.dialog{
+  display: none;
+  position: absolute;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  z-index:1000;
+}
+.copyright{
+  z-index: 2;
+  position: absolute;
+  left:0;
+  width: 100%;
+  text-align: center;
+  bottom:10px;
+  font-size: 12px;
+  color:#943023;
+}
+.step_1{
+  background: url(../images/step_1.jpg) top center no-repeat;
+  -webkit-background-size: 100% auto;
+  background-size: 100% auto;
+}
+.btn-play{
+  z-index: 1;
+  position: absolute;
+  bottom:56px;
+  left:50%;
+  margin-left: -101px;
+  width: 202px;
+  height: 45px;
+  background: url(../images/play.png) center no-repeat;
+  -webkit-background-size: 100% 100%;
+  background-size: 100% 100%;
+}
+.step_2{
+  background: url(../images/step_2.jpg) top center no-repeat;
+  -webkit-background-size: 100% auto;
+  background-size: 100% auto;
+}
+.countdown{
+  position: absolute;
+  left:0;
+  width: 100%;
+  bottom:50px;
+  z-index:1;
+  font-size: 80px;
+  color:#fff;
+  opacity: 0.8;
+  text-align: center;
+}
+.step_3{
+  background: url(../images/step_3.jpg) bottom center no-repeat;
+  -webkit-background-size: 100% auto;
+  background-size: 100% auto;
+}
+.game{
+  position: absolute;
+  z-index:2;
+  left:50%;
+  margin-left:-144px ;
+  top:40px;
+  width: 288px;
+  height: 432px;
+  background: url(../images/game.png) center no-repeat;
+  -webkit-background-size: 100% 100%;
+  background-size: 100% 100%;
+}
+.game .time{
+  width:170px ;
+  height: 32px;
+  line-height: 32px;
+  margin-top: 24px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 60px;
+  border-radius: 5px;
+  font-size: 12px;
+  background:#e1e1e0 url(../images/time.jpg) 30px center no-repeat;
+  -webkit-background-size: auto 100%;
+  background-size: auto 100%;
+}
+.game .time b{font-size: 18px;vertical-align: bottom;}
+
+.game .word{
+  margin-top: 30px;
+  text-align: center;
+  font-size: 24px;
+  line-height: 1em;
+  color:#c9a063;
+  letter-spacing: 1px;
+  position: relative;
+}
+.game .word:after{
+  content:"";
+  display: block;
+  position: absolute;
+  left:50%;
+  top:44px;
+  margin-left: -131px;
+  width: 262px;
+  height: 5px;
+  background: url(../images/border.png) center no-repeat;
+  -webkit-background-size: 100% 100%;
+  background-size: 100% 100%;
+}
+.game .word .on{
+  color:#c30d23;
+  position: relative;
+}
+.game .word .mark:after{
+  content: "";
+  display: block;
+  position: absolute;
+  left:50%;
+  top:26px;
+  margin-left: -7px;
+  width: 14px;
+  height: 14px;
+  background: url(../images/mark.png) center no-repeat;
+  -webkit-background-size: 100% 100%;
+  background-size: 100% 100%;
+}
+
+.words{
+  margin-top: 32px;
+  font-size: 0;
+  color:#b16d10;
+  text-align: center;
+}
+.words span{
+  width: 36px;
+  height: 36px;
+  line-height: 34px;
+  border: 1px solid #c9a063;
+  display: inline-block;
+  text-align: center;
+  margin:5px;
+  font-size: 29px;
+}
+
+.success{
+  background:rgba(0,0,0,.9) url(../images/success.png) top center no-repeat;
+  -webkit-background-size: 100% auto;
+  background-size: 100% auto;
+  font-size: 22px;
+  color:#da0112;
+  text-align: center;
+  padding-top: 30%;
+  padding-left: 20%;
+  padding-right: 20%;
+}
+
+.fail{
+  background:rgba(0,0,0,.9) url(../images/fail.png) top center no-repeat;
+  -webkit-background-size: 100% auto;
+  background-size: 100% auto;
+}
+.btn-again{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 115px;
+  height: 36px;
+  background: url(../images/again.png) center no-repeat;
+  -webkit-background-size: 100% auto;
+  background-size: 100% auto;
+  margin-top: 400px;
+}

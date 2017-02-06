@@ -1,0 +1,196 @@
+/*reset*/
+*{
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  -webkit-tap-highlight-color: transparent;  
+  -webkit-appearance: none;  
+}
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+img{max-width: 100%;}
+table {border-collapse: collapse; border-spacing: 0;}
+/*公共样式*/
+.btn:active{opacity: 0.6;}
+.row:after{content:"";display: block;clear: both;}
+/*内容部分*/
+.content{
+  position: relative;
+  z-index:1;
+  width: 100%;
+  max-width: 540px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: hidden;
+}
+.shade{
+  display: none;
+  position: absolute;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  z-index:900;
+  background-color: rgba(0,0,0,.6);
+}
+.dialog{
+  display: none;
+  position: absolute;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  z-index:1000;
+}
+.dialog-guize{
+  background-image: url(../images/guize.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  -webkit-background-size: 90% auto;
+  background-size: 90% auto;
+}
+.step-1{
+  background: url(../images/home.jpg) center no-repeat;
+  -webkit-background-size: auto 100%;
+  background-size:cover ;
+}
+.logo{
+  position: absolute;
+  z-index: 2;
+  top:10px;
+  right:10px;
+  width: 160px;
+}
+.banner{
+  position: absolute;
+  left:0;
+  top:100px;
+  width: 100%;
+}
+.btn-play{
+  width: 230px;
+  position: absolute;
+  bottom:100px;
+  left:50%;
+  margin-left: -115px;
+}
+.btn-guize{
+  width: 70px;
+  position: absolute;
+  bottom:50px;
+  left:50%;
+  margin-left: -35px;
+}
+
+
+.step-2{
+  background: url(../images/game.jpg) center no-repeat;
+  -webkit-background-size: auto 100%;
+  background-size:cover ;
+}
+.time{
+  margin-top:60px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+  width: 176px;
+  height: 29px;
+  line-height: 29px;
+  background: url(../images/time.png) center no-repeat;
+  -webkit-background-size: cover;
+  background-size: cover;
+  text-align: center;
+  font-size: 18px;
+  color:#fde703;
+}
+.time span{
+  font-size: 26px;
+  color:#fff;
+}
+.card{
+  float:left;
+  margin-left: 2%;
+  margin-bottom: 12px;
+  position: relative;
+  transition: all 500ms;
+  -webkit-transition: all 500ms;
+}
+.card:before{
+  content:"";
+  display: block;
+  position: absolute;
+  left:0;
+  top:0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  background: url(../images/i00.png) center no-repeat;
+  -webkit-background-size: cover;
+  background-size: cover;
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
+  transition: all 500ms;
+  -webkit-transition: all 500ms;
+}
+.card.hide{
+  opacity: 0;
+  visibility: hidden;
+}
+.card.show:before{
+  transform:translate3d(0,0,0) rotateY(180deg);
+  -webkit-transform:translate3d(0,0,0) rotateY(180deg);
+
+}
+.card.show:after{
+  transform:translate3d(0,0,0) rotateY(360deg);
+  -webkit-transform:translate3d(0,0,0) rotateY(360deg);
+}
+.card:after{
+  content:"";
+  display: block;
+  position: absolute;
+  z-index: 1;
+  left:0;
+  top:0;
+  width: 100%;
+  height: 100%;
+  -webkit-background-size: cover;
+  background-size: cover;
+  transform:translate3d(0,0,0) rotateY(180deg);
+  -webkit-transform:translate3d(0,0,0) rotateY(180deg);
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
+  transition: all 500ms;
+  -webkit-transition: all 500ms;
+}
+.card-1:after{
+  background-image: url(../images/i01.png);
+}
+.card-2:after{
+  background-image: url(../images/i02.png);
+}
+.card-3:after{
+  background-image: url(../images/i03.png);
+}
+.card-4:after{
+  background-image: url(../images/i04.png);
+}
+.card-5:after{
+  background-image: url(../images/i05.png);
+}
+.card-6:after{
+  background-image: url(../images/i06.png);
+}
+.card-7:after{
+  background-image: url(../images/i07.png);
+}
+.card-8:after{
+  background-image: url(../images/i08.png);
+}

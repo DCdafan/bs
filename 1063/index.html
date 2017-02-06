@@ -1,0 +1,269 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
+  <!-- 删除默认的苹果工具栏和菜单栏 -->
+  <meta content="yes" name="apple-mobile-web-app-capable">
+  <meta content="yes" name="apple-touch-fullscreen">
+  <!-- 移动端手机号码/邮箱识别 -->
+  <meta content="telephone=no,email=no" name="format-detection">
+  <!-- 添加到桌面图标/如果不想系统对图标添加效果，可以用apple-touch-icon-precomposed代替apple-touch-icon -->
+  <link href="" rel="apple-touch-icon-precomposed">
+  <!-- 浏览器中地址栏左侧显示的图标 -->
+  <link href="" rel="Shortcut Icon" type="image/x-icon">
+  <meta http-equiv="widow-target" content="_blank">
+  <!-- 微信调试 取消缓存 -->
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">  
+  <!-- 调试 -->
+  <title>记忆翻牌</title>
+  <script>
+   !function(N,M){function L(){var a=I.getBoundingClientRect().width;a/F>540&&(a=540*F);var d=a/10;I.style.fontSize=d+"px",D.rem=N.rem=d}var K,J=N.document,I=J.documentElement,H=J.querySelector('meta[name="viewport"]'),G=J.querySelector('meta[name="flexible"]'),F=0,E=0,D=M.flexible||(M.flexible={});if(H){console.warn("将根据已有的meta标签来设置缩放比例");var C=H.getAttribute("content").match(/initial\-scale=([\d\.]+)/);C&&(E=parseFloat(C[1]),F=parseInt(1/E))}else{if(G){var B=G.getAttribute("content");if(B){var A=B.match(/initial\-dpr=([\d\.]+)/),z=B.match(/maximum\-dpr=([\d\.]+)/);A&&(F=parseFloat(A[1]),E=parseFloat((1/F).toFixed(2))),z&&(F=parseFloat(z[1]),E=parseFloat((1/F).toFixed(2)))}}}if(!F&&!E){var y=N.navigator.userAgent,x=(!!y.match(/android/gi),!!y.match(/iphone/gi)),w=x&&!!y.match(/OS 9_3/),v=N.devicePixelRatio;F=x&&!w?v>=3&&(!F||F>=3)?3:v>=2&&(!F||F>=2)?2:1:1,E=1/F}if(I.setAttribute("data-dpr",F),!H){if(H=J.createElement("meta"),H.setAttribute("name","viewport"),H.setAttribute("content","initial-scale="+E+", maximum-scale="+E+", minimum-scale="+E+", user-scalable=no"),I.firstElementChild){I.firstElementChild.appendChild(H)}else{var u=J.createElement("div");u.appendChild(H),J.write(u.innerHTML)}}N.addEventListener("resize",function(){clearTimeout(K),K=setTimeout(L,300)},!1),N.addEventListener("pageshow",function(b){b.persisted&&(clearTimeout(K),K=setTimeout(L,300))},!1),"complete"===J.readyState?J.body.style.fontSize=12*F+"px":J.addEventListener("DOMContentLoaded",function(){J.body.style.fontSize=12*F+"px"},!1),L(),D.dpr=N.dpr=F,D.refreshRem=L,D.rem2px=function(d){var c=parseFloat(d)*this.rem;return"string"==typeof d&&d.match(/rem$/)&&(c+="px"),c},D.px2rem=function(d){var c=parseFloat(d)/this.rem;return"string"==typeof d&&d.match(/px$/)&&(c+="rem"),c}}(window,window.lib||(window.lib={})); 
+  </script>
+  <link rel="stylesheet" href="src/reset.css">
+  <link rel="stylesheet" href="src/index.min.css">
+  
+
+  <style>
+    .loading{
+      position: absolute;
+      top:0;
+      left:0;
+      right:0;
+      bottom:0;
+      z-index:100000;
+      background:#000;
+    }
+    .load-1,.load-2{width: 1.6rem;height: 1.6rem;background: rgba(216, 189, 51,0.6);position: absolute;top:50%;left: 50%;margin-left: -0.8rem;margin-top: -0.8rem;border-radius: 50%;}
+    .tip{
+      font-size: 0.5rem;
+      color: rgb(216, 189, 51)  ;
+      text-align: center;
+      position: absolute;
+      top:50%;
+      padding-top: 1rem;
+      left: 0;
+      width: 100%;
+    }
+    .load-1{
+      -webkit-animation: myload-1 2s infinite ease-in-out;
+    }
+    @-webkit-keyframes myload-1{
+      from {
+        -webkit-transform: scale3d(.2,.2,1);
+      }
+      50%{
+        -webkit-transform: scale3d(1,1,1);
+      }
+      to{
+        -webkit-transform: scale3d(.2,.2,1);
+      }
+    }
+    .load-2{
+      -webkit-animation: myload-2 2s infinite ease-in-out;
+    }
+    @-webkit-keyframes myload-2{
+      from {
+        -webkit-transform: scale3d(1,1,1);
+      }
+      50%{
+        -webkit-transform: scale3d(0.2,0.2,1);
+      }
+      to{
+        -webkit-transform: scale3d(1,1,1);
+      }
+    }
+  </style>
+  <script>
+    function load(list){
+      if(list == undefined ) return
+      var img = list.img == undefined ? [] : list.img ;
+      var js = list.js == undefined ? [] : list.js ;
+      var css = list.css == undefined ? [] : list.css ;
+      var audio = list.audio == undefined ? [] : list.audio ;
+      var length = img.length + js.length + audio.length , num = 0;
+      function progress(num){
+        var progress = parseInt(num*100/length);
+        // console.log(progress)
+        document.getElementsByClassName('loading')[0].getElementsByClassName('tip')[0].innerHTML=progress+"%";
+        if(num == length){
+          document.getElementsByClassName('loading')[0].style.display='none';
+          document.body.className = document.body.className +' ready';
+        }
+      }
+      function imgLoad(src){
+        var img = new Image();
+        img.onload = function () {
+            num++;
+            progress(num);
+        };
+        img.src = src;
+      }
+      function audioLoad(src){
+        var audio = new Audio();
+        audio.onload = function () {
+            num++;
+            progress(num);
+        };
+        audio.src = src;
+      }
+
+      function jsLoad(list,index){
+        if(index == undefined ) index = 0;
+        if(index >= list.length) return
+        var _doc=document.getElementsByTagName('head')[0];
+        var script=document.createElement('script');
+            script.setAttribute('type','text/javascript');
+            script.setAttribute('src',list[index]);
+         _doc.appendChild(script);
+         script.onload=function(){
+            index++
+            jsLoad(list,index);
+            num++;
+            progress(num);
+         }
+      }
+
+      for(var i=0;i<img.length;i++){
+        imgLoad(img[i]);
+      }
+      for(var i=0;i<audio.length;i++){
+        audioLoad(audio[i]);
+      }
+      jsLoad(js);
+    }
+
+  </script>
+  <script>
+    var loadListImg = [
+    'images/canyuyouxi.png',
+    'images/chenggong-1.png',
+    'images/chenggong-2.png',
+    'images/chenggong.png',
+    'images/e.png',
+    'images/game.jpg',
+    'images/guize.png',
+    'images/home.jpg',
+    'images/i00.png',
+    'images/i01.png',
+    'images/i02.png',
+    'images/i03.png',
+    'images/i04.png',
+    'images/i05.png',
+    'images/i06.png',
+    'images/i07.png',
+    'images/i08.png',
+    'images/logo.png',
+    'images/shibai.png',
+    'images/star.png',
+    'images/time.png',
+    'images/youxiguize.png'
+    ],
+        loadJS = ['src/jquery-2.2.3.min.js','src/index.js']
+    load({
+      img : loadListImg,
+      js  : loadJS,
+      // audio :['src/bg.mp3']
+    });
+  </script>
+
+
+</head>
+<body>
+  <div class="loading">
+    <div class="load-1 "></div>
+    <div class="load-2"></div>
+    <div class="tip">0%</div>
+  </div>
+
+  <div class="page-group">
+    <div class="page">
+      <div class="content" style="font-size:0;">
+        <div class="content-inner home">
+          <img src="images/home.jpg" alt="">
+          <div class="star">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <img src="images/logo.png" alt="" class="logo">
+          <img src="images/banner.png" alt="" class="banner">
+          <a href="game.html"><img src="images/canyuyouxi.png" alt="" class="btn btn-canyu"></a>
+          <img src="images/youxiguize.png" alt="" class="btn btn-guize">
+        </div>
+      </div>
+    </div>
+    <!-- 遮罩 -->
+    <div id="shade" class=""></div>
+    <!-- 弹框 -->
+    <div class="dialog " >
+      <img src="images/guize.png" alt="" class="guize">
+    </div>
+  </div>
+<script src="src/jquery-2.2.3.min.js"></script>
+<script src="src/index.js"></script>
+<script>
+  $(function(){
+    $('.btn-guize').on('click',function(){
+      $('#shade').show();
+      $('.dialog').slideDown();
+    })
+
+    $('.dialog').on('click',function(){
+      $('#shade').hide();
+      $('.dialog').slideUp();
+    })
+
+  })
+</script>
+</body>
+</html>

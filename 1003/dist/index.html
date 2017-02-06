@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <title>华盛南院</title>
+  <script>
+    !function(e,t){function i(){var t=n.getBoundingClientRect().width;t/m>540&&(t=540*m);var i=t/10;n.style.fontSize=i+"px",s.rem=e.rem=i}var a,r=e.document,n=r.documentElement,o=r.querySelector('meta[name="viewport"]'),l=r.querySelector('meta[name="flexible"]'),m=0,d=0,s=t.flexible||(t.flexible={});if(o){console.warn("将根据已有的meta标签来设置缩放比例");var c=o.getAttribute("content").match(/initial\-scale=([\d\.]+)/);c&&(d=parseFloat(c[1]),m=parseInt(1/d))}else if(l){var p=l.getAttribute("content");if(p){var u=p.match(/initial\-dpr=([\d\.]+)/),f=p.match(/maximum\-dpr=([\d\.]+)/);u&&(m=parseFloat(u[1]),d=parseFloat((1/m).toFixed(2))),f&&(m=parseFloat(f[1]),d=parseFloat((1/m).toFixed(2)))}}if(!m&&!d){var h=e.navigator.userAgent,v=(!!h.match(/android/gi),!!h.match(/iphone/gi)),x=v&&!!h.match(/OS 9_3/),b=e.devicePixelRatio;m=v&&!x?b>=3&&(!m||m>=3)?3:b>=2&&(!m||m>=2)?2:1:1,d=1/m}if(n.setAttribute("data-dpr",m),!o)if(o=r.createElement("meta"),o.setAttribute("name","viewport"),o.setAttribute("content","initial-scale="+d+", maximum-scale="+d+", minimum-scale="+d+", user-scalable=no"),n.firstElementChild)n.firstElementChild.appendChild(o);else{var w=r.createElement("div");w.appendChild(o),r.write(w.innerHTML)}e.addEventListener("resize",function(){clearTimeout(a),a=setTimeout(i,300)},!1),e.addEventListener("pageshow",function(e){e.persisted&&(clearTimeout(a),a=setTimeout(i,300))},!1),"complete"===r.readyState?r.body.style.fontSize=12*m+"px":r.addEventListener("DOMContentLoaded",function(){r.body.style.fontSize=12*m+"px"},!1),i(),s.dpr=e.dpr=m,s.refreshRem=i,s.rem2px=function(e){var t=parseFloat(e)*this.rem;return"string"==typeof e&&e.match(/rem$/)&&(t+="px"),t},s.px2rem=function(e){var t=parseFloat(e)/this.rem;return"string"==typeof e&&e.match(/px$/)&&(t+="rem"),t}}(window,window.lib||(window.lib={}));
+  </script>
+  <style>
+    a,hr{padding:0}a,button,input,select,textarea{margin:0}article,aside,details,figure,footer,header,hr,nav,section,summary{display:block}abbr,address,article,aside,audio,b,blockquote,body,body div,caption,cite,code,dd,del,details,dfn,dl,dt,em,fieldset,figure,footer,form,h1,h2,h3,h4,h5,h6,header,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,p,pre,q,samp,section,small,span,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,ul,var,video{margin:0;padding:0;border:0;font-size:100%;font-weight:400;vertical-align:baseline;background:0 0}input[type=checkbox],th{vertical-align:bottom}html{box-sizing:border-box;overflow-y:scroll}*,:after,:before{box-sizing:inherit}embed,img,object{max-width:100%}ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}a{font-size:100%;vertical-align:baseline;background:0 0}del{text-decoration:line-through}abbr[title],dfn[title]{border-bottom:1px dotted #000;cursor:help}th{font-weight:700}td{font-weight:400;vertical-align:top}hr{height:1px;border:0;border-top:1px solid #ccc;margin:1em 0}input,select{vertical-align:middle}pre{white-space:pre;white-space:pre-wrap;white-space:pre-line;word-wrap:break-word}input[type=radio]{vertical-align:text-bottom}.ie7 input[type=checkbox]{vertical-align:baseline}.ie6 input{vertical-align:text-bottom}input,select,textarea{font:99% sans-serif}table{border-collapse:collapse;border-spacing:0;font:100%}small{font-size:85%}strong{font-weight:700}td,td img{vertical-align:top}sub,sup{font-size:75%;line-height:0;position:relative}sup{top:-.5em}sub{bottom:-.25em}code,kbd,pre,samp{font-family:monospace,sans-serif}.clickable,button,input[type=button],input[type=file],input[type=submit],label{cursor:pointer}button,input[type=button]{width:auto;overflow:visible}.ie7 img{-ms-interpolation-mode:bicubic}.clearfix:after{content:".";display:block;height:0;visibility:hidden;font-size:0;clear:both}*{-webkit-tap-highlight-color:transparent;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}
+  </style>
+  <link rel="stylesheet" href="css/index.min.css">
+
+<style>
+    .loading{
+      position: absolute;
+      top:0;
+      left:0;
+      right:0;
+      bottom:0;
+      z-index:100000;
+      background:#000;
+    }
+    .load-1,.load-2{width: 1.6rem;height: 1.6rem;background: rgba(216, 189, 51,0.6);position: absolute;top:50%;left: 50%;margin-left: -0.8rem;margin-top: -0.8rem;border-radius: 50%;}
+    .tip{
+      font-size: 0.5rem;
+      color: rgb(216, 189, 51)  ;
+      text-align: center;
+      position: absolute;
+      top:50%;
+      padding-top: 1rem;
+      left: 0;
+      width: 100%;
+    }
+    .load-1{
+      -webkit-animation: myload-1 2s infinite ease-in-out;
+    }
+    @-webkit-keyframes myload-1{
+      from {
+        -webkit-transform: scale3d(.2,.2,1);
+      }
+      50%{
+        -webkit-transform: scale3d(1,1,1);
+      }
+      to{
+        -webkit-transform: scale3d(.2,.2,1);
+      }
+    }
+    .load-2{
+      -webkit-animation: myload-2 2s infinite ease-in-out;
+    }
+    @-webkit-keyframes myload-2{
+      from {
+        -webkit-transform: scale3d(1,1,1);
+      }
+      50%{
+        -webkit-transform: scale3d(0.2,0.2,1);
+      }
+      to{
+        -webkit-transform: scale3d(1,1,1);
+      }
+    }
+  </style>
+  <script>
+    function load(list){
+      if(list == undefined ) return
+      var img = list.img == undefined ? [] : list.img ;
+      var js = list.js == undefined ? [] : list.js ;
+      var css = list.css == undefined ? [] : list.css ;
+      var audio = list.audio == undefined ? [] : list.audio ;
+      var length = img.length + js.length + audio.length , num = 0;
+      function progress(num){
+        var progress = parseInt(num*100/length);
+        // console.log(progress)
+        document.getElementsByClassName('loading')[0].getElementsByClassName('tip')[0].innerHTML=progress+"%";
+        if(num == length){
+          document.getElementsByClassName('loading')[0].style.display='none';
+          document.body.className = document.body.className +' ready';
+        }
+      }
+      function imgLoad(src){
+        var img = new Image();
+        img.onload = function () {
+            num++;
+            progress(num);
+        };
+        img.src = src;
+      }
+      function audioLoad(src){
+        var audio = new Audio();
+        audio.onloadedmetadata = function () {
+            num++;
+            progress(num);
+        };
+        audio.src = src;
+      }
+
+      function jsLoad(list,index){
+        if(index == undefined ) index = 0;
+        if(index >= list.length) return
+        var _doc=document.getElementsByTagName('head')[0];
+        var script=document.createElement('script');
+            script.setAttribute('type','text/javascript');
+            script.setAttribute('src',list[index]);
+         _doc.appendChild(script);
+         script.onload=function(){
+            index++
+            jsLoad(list,index);
+            num++;
+            progress(num);
+         }
+      }
+
+      for(var i=0;i<img.length;i++){
+        imgLoad(img[i]);
+      }
+      for(var i=0;i<audio.length;i++){
+        audioLoad(audio[i]);
+      }
+      jsLoad(js);
+    }
+
+  </script>
+
+
+</head>
+<body>
+
+<div class="loading">
+  <div class="load-1 "></div>
+  <div class="load-2"></div>
+  <div class="tip">0%</div>
+</div>
+<div class="page-group">
+  <div class="page">
+    <!-- <header> 头部 </header> -->    
+    <div class="content">
+      <div class="content-inner">
+        <div id="step-1">
+          <img src="images/home.jpg" alt="" class="block">
+          <div class="icon-start btn btn-start"></div>
+          <div class="brand">合房网技术支持</div>
+        </div>
+        <div id="step-2" style="display: none;">
+          <img src="images/game.jpg" class="block" alt="">
+          <div class="time">
+            <span></span>
+          </div>
+          <div class="title">
+            <span>健</span>
+            <span>康</span>
+            <span>美</span>
+            <span>宅</span>
+            <span>仰</span>
+            <span>止</span>
+            <span>南</span>
+            <span>院</span>
+            <i></i>
+          </div>
+          <div class="border"></div>
+
+          <div class="game row">
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="page-left"> 左侧栏 </div> -->
+  <!-- <div class="page-right"> 右侧栏 </div> -->
+  <!-- 遮罩 -->
+  <div id="shade"></div>
+  <!-- 弹框 -->
+  <!-- 活动规则 -->
+  <div class="dialog dialog-gz">
+    <img src="images/gz.png" alt="">
+  </div>
+  <!-- 成功通关 -->
+  <div class="dialog dialog-prize">
+    <img src="images/prize.png" alt="" class="block">
+  </div>
+  <!-- 通关失败 -->
+  <div class="dialog dialog-fail">
+    <img src="images/fail.png" class="block" alt="">
+    <div class="icon-again btn btn-again"></div>
+  </div>
+
+
+  <!-- 红包发完 -->
+  <div class="dialog dialog-null">
+    <img src="images/null.png" class="block" alt="">
+    <p>红包被领完了 <br>继续关注华盛南院，更多的活动还在路上</p>
+  </div>
+
+</div>
+
+
+
+
+<script src="http://cdn.bootcss.com/jquery/2.2.3/jquery.min.js"></script>
+<script src="js/index.js"></script>
+
+
+<script>
+  var loadListImg = [
+  'images/again.png',
+  'images/border.png',
+  'images/er.png',
+  'images/fail.png',
+  'images/game.jpg',
+  'images/gz.jpg',
+  'images/gz.png',
+  'images/home.jpg',
+  'images/prize.png',
+  'images/start.png',
+  'images/null.png',
+  'images/sub.png',
+  'images/time.png'
+  ];
+
+  load({
+    img : loadListImg
+  });
+</script>
+  
+<script>
+window.onload = function(){
+  document.body.addEventListener("touchmove",function(e){
+    e.preventDefault();
+    e.stopPropagation();
+  })
+  //第一步
+  $('.btn-start').on('click',function(){
+    $('.dialog-gz').fadeIn();
+  })
+  //第二步
+  $('.dialog-gz').on('click',function(){
+    $('#step-1').hide();
+    $('#step-2').show();
+    $('.dialog-gz').fadeOut(function(){
+      game.play();
+    });
+  })
+  $('.btn-again').on('click',function(){
+    // 再玩一次  判断 
+    location.reload();
+  })
+
+  var game = new Game({
+    'ele'     : '.game',
+    'title'   : '.title',
+    'time'    : '.time',
+    'times'   :  20,
+    'length'  :  8,
+    'success' : function(result){
+      console.log('success');
+      $('.dialog-prize').show();
+    },
+    'fail'    : function(result){
+      console.log('fail');
+      $('.dialog-fail').show();
+    }
+  });
+  // game.play();
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+
+.btn-start{
+  position: absolute;
+  top:rem(994);
+  z-index:10;
+  left:50%;
+  margin-left: rem(-404/2);
+}
+.brand{
+  position: absolute;
+  left:0;
+  width: 100%;
+  text-align: center;
+  top:rem(1106);
+  font-size: rem(24);
+  color:#943023;
+  z-index:5;
+}
+.dialog-gz{
+  background: rgba(0,0,0,.95);
+}
+img.er{
+  position: absolute;
+  width: rem(270);
+  height: rem(270);
+  z-index:10;
+  left:50%;
+  top:rem(418);
+  margin-left: rem(-270/2);
+}
+.time{
+  @include icon('../images/time.png',340,64);
+  position: absolute;
+  top:rem(130);
+  left:50%;
+  margin-left: rem(-340/2);
+  font-size: rem(36);
+  color:#1e180f;
+  line-height: rem(70);
+  padding-left: rem(200);
+  z-index:2;
+}
+.title{
+  font-size: rem(0);
+  color:#c9a063;
+  position: absolute;
+  top:rem(250);
+  left:0;
+  width: 100%;
+  text-align: center;
+  span{
+    line-height: 1em;
+    font-size: rem(48);
+    &:nth-child(4){
+      margin-right: rem(14);
+    }
+    &.on{
+      color:#c30d23;
+    }
+  }
+  i{
+    @include icon('../images/sub.png',26,26);
+    position: absolute;
+    left:0;
+    top:120%;
+    transition: all 300ms ;
+    margin-left: rem(-26/2);
+  }
+  z-index:2;
+}
+.border{
+  @include icon('../images/border.png',524,10);
+  position: absolute;
+  top:rem(340);
+  left:50%;
+  margin-left: rem(-524/2);
+  z-index:2;
+}
+.game{
+  width: rem(570);
+  position: absolute;
+  z-index:2;
+  left:50%;
+  margin-left: rem(-570/2);
+  top:rem(370);
+  font-size: 0;
+  padding-left: rem(30);
+  span{
+    display: block;
+    float: left;
+    font-size: rem(58);
+    text-align: center;
+    width: rem(78);
+    height: rem(78);
+    line-height: rem(74);
+    color:#c9a063;
+    border:1px solid #c9a063;
+    margin-right: rem(10);
+    margin-bottom: rem(10);
+  }
+}
+.btn-again{
+  position: absolute;
+  top:rem(774);
+  left:50%;
+  z-index:10;
+  margin-left: rem(-230/2);
+}
+
+#step-1{
+  opacity: 0;
+  transition:all 1000ms;
+}
+.ready #step-1{
+  opacity: 1;
+}
+.dialog-null{
+  p{
+    position: absolute;
+    top:rem(200);
+    width: rem(500);
+    z-index:2;
+    left:50%;
+    margin-left: rem(-500/2);
+    font-size: rem(36);
+    color:#c9a063;
+    line-height: 1.4em;
+  }
+}

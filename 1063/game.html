@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
+  <!-- 删除默认的苹果工具栏和菜单栏 -->
+  <meta content="yes" name="apple-mobile-web-app-capable">
+  <meta content="yes" name="apple-touch-fullscreen">
+  <!-- 移动端手机号码/邮箱识别 -->
+  <meta content="telephone=no,email=no" name="format-detection">
+  <!-- 添加到桌面图标/如果不想系统对图标添加效果，可以用apple-touch-icon-precomposed代替apple-touch-icon -->
+  <link href="" rel="apple-touch-icon-precomposed">
+  <!-- 浏览器中地址栏左侧显示的图标 -->
+  <link href="" rel="Shortcut Icon" type="image/x-icon">
+  <meta http-equiv="widow-target" content="_blank">
+  <!-- 微信调试 取消缓存 -->
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">  
+  <!-- 调试 -->
+  <title>记忆翻牌</title>
+  <script>
+   !function(N,M){function L(){var a=I.getBoundingClientRect().width;a/F>540&&(a=540*F);var d=a/10;I.style.fontSize=d+"px",D.rem=N.rem=d}var K,J=N.document,I=J.documentElement,H=J.querySelector('meta[name="viewport"]'),G=J.querySelector('meta[name="flexible"]'),F=0,E=0,D=M.flexible||(M.flexible={});if(H){console.warn("将根据已有的meta标签来设置缩放比例");var C=H.getAttribute("content").match(/initial\-scale=([\d\.]+)/);C&&(E=parseFloat(C[1]),F=parseInt(1/E))}else{if(G){var B=G.getAttribute("content");if(B){var A=B.match(/initial\-dpr=([\d\.]+)/),z=B.match(/maximum\-dpr=([\d\.]+)/);A&&(F=parseFloat(A[1]),E=parseFloat((1/F).toFixed(2))),z&&(F=parseFloat(z[1]),E=parseFloat((1/F).toFixed(2)))}}}if(!F&&!E){var y=N.navigator.userAgent,x=(!!y.match(/android/gi),!!y.match(/iphone/gi)),w=x&&!!y.match(/OS 9_3/),v=N.devicePixelRatio;F=x&&!w?v>=3&&(!F||F>=3)?3:v>=2&&(!F||F>=2)?2:1:1,E=1/F}if(I.setAttribute("data-dpr",F),!H){if(H=J.createElement("meta"),H.setAttribute("name","viewport"),H.setAttribute("content","initial-scale="+E+", maximum-scale="+E+", minimum-scale="+E+", user-scalable=no"),I.firstElementChild){I.firstElementChild.appendChild(H)}else{var u=J.createElement("div");u.appendChild(H),J.write(u.innerHTML)}}N.addEventListener("resize",function(){clearTimeout(K),K=setTimeout(L,300)},!1),N.addEventListener("pageshow",function(b){b.persisted&&(clearTimeout(K),K=setTimeout(L,300))},!1),"complete"===J.readyState?J.body.style.fontSize=12*F+"px":J.addEventListener("DOMContentLoaded",function(){J.body.style.fontSize=12*F+"px"},!1),L(),D.dpr=N.dpr=F,D.refreshRem=L,D.rem2px=function(d){var c=parseFloat(d)*this.rem;return"string"==typeof d&&d.match(/rem$/)&&(c+="px"),c},D.px2rem=function(d){var c=parseFloat(d)/this.rem;return"string"==typeof d&&d.match(/px$/)&&(c+="rem"),c}}(window,window.lib||(window.lib={})); 
+  </script>
+  <link rel="stylesheet" href="src/reset.css">
+  <link rel="stylesheet" href="src/index.min.css">
+</head>
+<body>
+  <div class="page-group">
+    <div class="page">
+      <div class="content" style="font-size:0;">
+        <div class="content-inner game">
+          <div class="time">
+            <p>倒计时 <span></span> 秒</p>
+          </div>
+
+          <div class="game-inner row">
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 遮罩 -->
+    <div id="shade"></div>
+    <!-- 弹框 -->
+    <div class="dialog dialog-shibai">
+      <img src="images/shibai.png" alt="">
+    </div>
+
+    <div class="dialog dialog-chenggong">
+      <img src="images/chenggong-1.png" alt="" class="images-3">
+      <img src="images/chenggong-2.png" alt="" class="images-2">
+      <img src="images/chenggong.png" alt="" class="images-1">
+      <p>1元红包</p>
+    </div>
+
+  </div>
+<script src="src/jquery-2.2.3.min.js"></script>
+<script src="src/index.js"></script>
+<script>
+  $(function(){
+    $('.time span').html('50');
+    game.game({
+      'imgStr':'images/',
+      'secondCount':50,
+      'element':$('.game-inner'),
+      'callback':function(){
+        console.log('通关啦！！！');
+        $('.dialog-chenggong p').html('100元红包');
+        $('#shade').show();
+        $('.dialog-chenggong').slideDown();
+      },
+      'fail':function(){
+        $('#shade').show();
+        $('.dialog-shibai').slideDown();
+      }
+    });
+
+    $('.dialog').on('click',function(){
+      $('.dialog').slideUp();
+      $('#shade').hide();
+      location.href="over.html";
+    })
+  })
+</script>
+</body>
+</html>
