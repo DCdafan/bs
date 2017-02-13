@@ -20,7 +20,7 @@ function shuffle(arr){
 
 var Game = function(){
   this.content = $('.content');
-  this.width = $(window).width();
+  this.width = $(window).width()>540?540:$(window).width();;
   this.height = $(window).height();
   this.word = ['健','康','美','宅','仰','止','南','院'];
   this.words = ['建','喃','楠','趾','楠','陛','院','建','楠','南','楠','宇','趾','隶','趾','迎','迎','宅','趾','康','隶','仰','迎','此','此','此','止','宇','养','美','建','健','此','此','养','此'];
