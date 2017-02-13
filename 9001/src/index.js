@@ -48,8 +48,11 @@ Game.prototype.step_1 = function(){
   var html ='';
   html += '<img src="images/banner.png" alt="标题" class="banner">'
         + '<img src="images/canyuyouxi.png" alt="参与游戏" class="btn btn-play">'
+        + '<canvas id="canvas" width="750" height="900"></canvas>'
         + '<img src="images/youxiguize.png" alt="规则" class="btn btn-guize">';
   _this.content.html(html);
+
+  drawStar();
 }
 //第二步
 Game.prototype.step_2 = function(){
@@ -184,9 +187,4 @@ Game.prototype.event = function(){
   });
 }
 
-window.onload = load();
 
-function load(){
-  var game = new Game();
-  // game.step_2();
-}

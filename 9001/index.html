@@ -5,13 +5,107 @@
   <title>记忆翻牌</title>
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
   <link rel="stylesheet" href="src/index.css">
+
+  <style>
+    .loading{
+      position: absolute;
+      top:0;
+      left:0;
+      right:0;
+      bottom:0;
+      z-index:100000;
+      background:#000;
+    }
+    .load-1,.load-2{width: 1.6rem;height: 1.6rem;background: rgba(216, 189, 51,0.6);position: absolute;top:50%;left: 50%;margin-left: -0.8rem;margin-top: -0.8rem;border-radius: 50%;}
+    .tip{
+      font-size: 0.5rem;
+      color: rgb(216, 189, 51)  ;
+      text-align: center;
+      position: absolute;
+      top:50%;
+      padding-top: 1rem;
+      left: 0;
+      width: 100%;
+    }
+    .load-1{
+      -webkit-animation: myload-1 2s infinite ease-in-out;
+    }
+    @-webkit-keyframes myload-1{
+      from {
+        -webkit-transform: scale3d(.2,.2,1);
+      }
+      50%{
+        -webkit-transform: scale3d(1,1,1);
+      }
+      to{
+        -webkit-transform: scale3d(.2,.2,1);
+      }
+    }
+    .load-2{
+      -webkit-animation: myload-2 2s infinite ease-in-out;
+    }
+    @-webkit-keyframes myload-2{
+      from {
+        -webkit-transform: scale3d(1,1,1);
+      }
+      50%{
+        -webkit-transform: scale3d(0.2,0.2,1);
+      }
+      to{
+        -webkit-transform: scale3d(1,1,1);
+      }
+    }
+  </style>
+  <script>
+    function load(list,callback){
+      if(list == undefined ) return
+      var img = list.img == undefined ? [] : list.img ;
+      var length = img.length , num = 0;
+      function progress(num){
+        var progress = parseInt(num*100/length);
+        // console.log(progress)
+        document.getElementsByClassName('loading')[0].getElementsByClassName('tip')[0].innerHTML=progress+"%";
+        if(num == length){
+          document.getElementsByClassName('loading')[0].style.display='none';
+          document.body.className = document.body.className +' ready';
+
+          callback&&callback();
+        }
+      }
+      function imgLoad(src){
+        var img = new Image();
+        img.onload = function () {
+            num++;
+            progress(num);
+        };
+        img.src = src;
+      }
+      for(var i=0;i<img.length;i++){
+        imgLoad(img[i]);
+      }
+    }
+
+  </script>
+
+  <style>
+    canvas{
+      width: 100%;
+      /*background-color: #240d44;*/
+    }
+  </style>
 </head>
 <body>
+  <div class="loading">
+    <div class="load-1 "></div>
+    <div class="load-2"></div>
+    <div class="tip">0%</div>
+  </div>
   <div class="content">
     
   </div>
   
-  <img src="images/logo.png" alt="logo" class="logo">
+  
+  <!-- <img src="images/logo.png" alt="logo" class="logo"> -->
 
   <!-- 遮罩层 -->
   <div class="shade"></div>
@@ -28,6 +122,96 @@
   </div>
   
   <script src="src/jquery.min.js"></script>
+  <script src="src/modernizr.js"></script>
   <script src="src/index.js"></script>
+  <script>
+    var loadListImg = [
+    'images/banner.png',
+    'images/canyuyouxi.png',
+    'images/chenggong-1.png',
+    'images/chenggong-2.png',
+    'images/chenggong.png',
+    'images/e.png',
+    'images/fail.png',
+    'images/game.jpg',
+    'images/guize.png',
+    'images/home.jpg',
+    'images/i00.png',
+    'images/i01.png',
+    'images/i02.png',
+    'images/i03.png',
+    'images/i04.png',
+    'images/i05.png',
+    'images/i06.png',
+    'images/i07.png',
+    'images/i08.png',
+    'images/know.png',
+    'images/logo.png',
+    'images/shibai.png',
+    'images/star.png',
+    'images/success.png',
+    'images/time.png',
+    'images/youxiguize.png'
+    ];
+    load({
+      img : loadListImg
+    },function(){
+      var game = new Game();
+      
+    });
+
+function drawStar(){
+  var theCanvas = document.getElementById('canvas');
+  var context = theCanvas.getContext('2d');
+
+  var number = 40;
+  var starList = [];
+
+  var star = new Image();
+  star.src = "images/star.png";
+
+  var j = 0;
+  var timer_1= setInterval(function(){
+      j++;
+      if(j>number){
+        clearInterval(timer_1);
+        return;
+      }
+      var r1 = Math.random();
+      var r2 = Math.random();
+      var r3 = Math.random();
+      starList.push([1030*r1+280,1030*r1-280,280*r2,280*r2,r2,0]);
+    },100)
+
+  setInterval(function(){
+    context.clearRect(0,0,750,900);
+    drawMotion(starList);
+  },10)
+  // drawMotion(starList);
+
+  function drawMotion(starList,r3){
+    // console.log(starList.length)
+    var length = starList.length;
+    for(var i=0;i<length;i++){
+      starList[i][5] += 0.2;
+      starList[i][0] -= starList[i][5]*starList[i][4]*0.4;
+      starList[i][1] += starList[i][5]*starList[i][4]*0.4;
+      if(starList[i][0]>750 || starList[i][1]>750){
+        var r1 = Math.random();
+        var r2 = Math.random();
+        starList[i][0] = 1030*r1+280;
+        starList[i][1] = 1030*r2-280;
+        starList[i][5] = 0;
+      }
+      // console.log(starList[i][0])
+      context.globalAlpha=starList[i][5]/20;
+      context.drawImage(star,starList[i][0],starList[i][1],starList[i][2],starList[i][3]);
+    }
+  }
+
+
+}
+
+  </script>
 </body>
 </html>
