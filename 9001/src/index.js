@@ -16,6 +16,57 @@ function shuffle(arr){
   return arr;
 }
 
+//流星
+function drawStar(){
+  var theCanvas = document.getElementById('canvas');
+  var context = theCanvas.getContext('2d');
+
+  var number = 40;
+  var starList = [];
+
+  var star = new Image();
+  star.src = "images/star.png";
+
+  var j = 0;
+  var timer_1= setInterval(function(){
+      j++;
+      if(j>number){
+        clearInterval(timer_1);
+        return;
+      }
+      var r1 = Math.random();
+      var r2 = Math.random();
+      var r3 = Math.random();
+      starList.push([1030*r1+280,1030*r1-280,280*r2,280*r2,r2,0]);
+    },200)
+
+  setInterval(function(){
+    context.clearRect(0,0,750,900);
+    drawMotion(starList);
+  },10)
+  // drawMotion(starList);
+
+  function drawMotion(starList,r3){
+    // console.log(starList.length)
+    var length = starList.length;
+    for(var i=0;i<length;i++){
+      starList[i][5] += 0.2;
+      starList[i][0] -= starList[i][5]*starList[i][4]*0.4;
+      starList[i][1] += starList[i][5]*starList[i][4]*0.4;
+      if(starList[i][0]>750 || starList[i][1]>750){
+        var r1 = Math.random();
+        var r2 = Math.random();
+        starList[i][0] = 1030*r1+280;
+        starList[i][1] = 1030*r2-280;
+        starList[i][5] = 0;
+      }
+      // console.log(starList[i][0])
+      context.globalAlpha=starList[i][5]/20;
+      context.drawImage(star,starList[i][0],starList[i][1],starList[i][2],starList[i][3]);
+    }
+  }
+}
+
 var Game = function(){
   this.content   = $('.content');
   this.width     = $(window).width()>540?540:$(window).width();
