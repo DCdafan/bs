@@ -17,6 +17,7 @@ html {
 }
 img{max-width: 100%;}
 table {border-collapse: collapse; border-spacing: 0;}
+canvas{width: 100%;}
 /*公共样式*/
 .btn:active{opacity: 0.6;}
 .row:after{content:"";display: block;clear: both;}
